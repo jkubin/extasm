@@ -14,9 +14,17 @@ typedef struct {
 } extsingle_t;
 
 extern void print_xflt(char *bfr, extsingle_t *num, unsigned int format);
-
 extern void print_flt(char *bfr, float *num, unsigned int format);
 extern void print_flt_to_bcd(char *bfr, float *num, unsigned int format);
+
+
+/*
+ * three cases of `format' for print_uintX():
+ * +format	<--- prefix padded with ' ' char
+ * 0		<--- automatic number width (no left hand side padding)
+ * -format	<--- prefix padded with '0' char
+ */
+
 extern void print_uint8(char *bfr, unsigned char *num, unsigned char format);
 extern void print_uint16(char *bfr, unsigned int *num, unsigned char format);
 extern void print_uint24(char *bfr, unsigned short long *num, unsigned char format);
