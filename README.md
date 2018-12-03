@@ -37,7 +37,7 @@ print_xflt(bfr, &xflt, 20);
 ...
 ```
 
-## The following example prints integers with various width to a buffer (as JSON):
+## The following example prints integers with various width to a buffer (JSON):
 ```
 unsigned long num;
 char bfr[100];
@@ -91,4 +91,4 @@ POSTINC0 = 0;
 /* bfr[] = "[12,12345,123]" */
 ```
 ## Simple, isn't it?
-# Beware of EXTASM, it could be dangerous and addictive!
+### Contact (Base64): bTR1bml4QGdtYWlsLmNvbQ
