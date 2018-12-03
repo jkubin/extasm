@@ -13,6 +13,10 @@ typedef struct {
 	float val;
 } extsingle_t;
 
+/*
+ * various floating point formats are defined in format.h
+ */
+
 extern void print_xflt(char *bfr, extsingle_t *num, unsigned int format);
 extern void print_flt(char *bfr, float *num, unsigned int format);
 extern void print_flt_to_bcd(char *bfr, float *num, unsigned int format);
