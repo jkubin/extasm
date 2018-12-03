@@ -3,13 +3,21 @@ PIC18 library written in EXTended ASM instruction set (better stack utilisation)
 The original Microchip PIC18 MCU library has slow and huge numeric print functions.
 I have written several functions in ASM because of speed, size and simplicity.
 
-## the following example is capable to print automatic format to 8 bytes width buffer:
+## the following example prints floating point number to a buffer (8 char width):
 ```
 char bfr[100];
 float flt;
 
-flt = 123.456;
+flt = 1.234567;
 print_flt(bfr, &flt, 8);
+
+flt = 12.34567;
+print_flt(bfr, &flt, 8);
+
+flt = 123.4567;
+print_flt(bfr, &flt, 8);
+
+...
 ```
 
 ## the following example prints integers with various width to a buffer (as JSON):
@@ -45,7 +53,7 @@ ptr = (char *)FSR0;
 ```
 num = 12;
 
-FSR0 = bfr;
+FSR0 = (unsigned)bfr;
 POSTINC0 = '[';
 print_uint32((char *)FSR0, &num, 0);
 POSTINC0 = ',';
