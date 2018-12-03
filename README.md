@@ -1,26 +1,43 @@
-# extasm
+# EXTASM
 PIC18 library written in EXTended ASM instruction set (better stack utilisation).
 The original Microchip PIC18 MCU library has slow and huge numeric print functions.
-I have written several functions in ASM because of speed, size and simplicity.
+I wrote several functions in ASM because of speed, size and simplicity.
 
-## the following example prints floating point number to a buffer (8 char width):
+## The following example prints floating point number to a buffer (8 char width):
 ```
 char bfr[100];
 float flt;
 
 flt = 1.234567;
 print_flt(bfr, &flt, 8);
+/* bfr[] = "1.234567" */
 
 flt = 12.34567;
 print_flt(bfr, &flt, 8);
 
 flt = 123.4567;
 print_flt(bfr, &flt, 8);
-
 ...
 ```
 
-## the following example prints integers with various width to a buffer (as JSON):
+## If you know IEEE 754, the following example is for you (8B mantissa):
+```
+char bfr[100];
+extsingle_t xflt;
+
+xflt.val = 1.234567;
+xflt.mant[4] = 0xab;
+xflt.mant[3] = 0xcd;
+xflt.mant[2] = 0xef;
+xflt.mant[1] = 0x01;
+xflt.mant[0] = 0x23;
+
+print_xflt(bfr, &xflt, 20);
+/* bfr[] = "1.234567126168137531" */
+...
+```
+
+## The following example prints integers with various width to a buffer (as JSON):
 ```
 unsigned long num;
 char bfr[100];
@@ -47,9 +64,11 @@ ptr = (char *)FSR0;
 
 *ptr++ = ']';
 *ptr = 0;
+
+/* bfr[] = "[12,12345,123]" */
 ```
 
-## if you love ASM and you know what are you doing, try the following code:
+## If you love ASM and you know what are you doing, try the following code:
 ```
 num = 12;
 
@@ -68,6 +87,8 @@ num = 123;
 print_uint32((char *)FSR0, &num, 0);
 POSTINC0 = ']';
 POSTINC0 = 0;
+
+/* bfr[] = "[12,12345,123]" */
 ```
 ## Simple, isn't it?
 # Beware of EXTASM, it could be dangerous and addictive!
